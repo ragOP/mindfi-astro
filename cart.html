@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout Page</title>
+  <title>PhonePe Checkout</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -104,7 +104,7 @@
         <p>Product: <span>Lucid Dream</span></p>
         <p>Price: <span>₹597</span></p>
       </div>
-      <button type="button" onclick="processPayment()">Place Order</button>
+      <button type="button" onclick="initiatePayment()">Place Order</button>
     </form>
     <div class="footer">
       <p>Powered by PhonePe</p>
@@ -112,25 +112,35 @@
   </div>
 
   <script>
-    function processPayment() {
-      const name = document.getElementById('name').value;
-      const phone = document.getElementById('phone').value;
-      const email = document.getElementById('email').value;
+    async function initiatePayment() {
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const email = document.getElementById("email").value;
 
       if (!name || !phone || !email) {
-        alert('Please fill out all fields.');
+        alert("Please fill out all fields.");
         return;
       }
 
-      // Mock PhonePe Integration
-      alert(`Order placed successfully!
-Name: ${name}
-Phone: ${phone}
-Email: ${email}
-Product: Lucid Dream
-Price: ₹597`);
+      const response = await fetch("http://localhost:9000/initiate-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          email,
+          amount: 59700, // Amount in paise (₹597)
+        }),
+      });
 
-      // Replace this with PhonePe's payment gateway code
+      const result = await response.json();
+
+      if (result.success) {
+        // Redirect to PhonePe payment URL
+        window.location.href = result.paymentUrl;
+      } else {
+        alert("Payment initiation failed: " + result.message);
+      }
     }
   </script>
 </body>
