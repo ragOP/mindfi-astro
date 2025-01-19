@@ -1,0 +1,15 @@
+{
+    "rewrites": [
+      {
+        "source": "/engpp",
+        "destination": "/bundle.html"
+    
+      },
+     
+      {
+        "source": "/",
+        "destination": "/index.html"
+       
+      }
+    ]
+   }
