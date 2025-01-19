@@ -1,238 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PhonePe Checkout</title>
-  <style>
-    /* General Styles */
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #f9f9f9, #e6e6e6);
-      color: #333;
-    }
-
-    /* Header */
-    .header {
-      background: #4caf50;
-      color: white;
-      padding: 15px 20px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .header h1 {
-      margin: 0;
-      font-size: 24px;
-      text-transform: uppercase;
-    }
-
-    /* Container */
-    .container {
-      max-width: 400px;
-      margin: 30px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .container:hover {
-      transform: scale(1.02);
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    h2 {
-      text-align: center;
-      color: #4caf50;
-      font-size: 20px;
-      margin-bottom: 20px;
-    }
-
-    /* Form Styles */
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 8px;
-      color: #666;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      font-size: 14px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      transition: border-color 0.3s;
-    }
-
-    input:focus {
-      border-color: #4caf50;
-      outline: none;
-      box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-    }
-
-    /* Product Summary */
-    .product-summary {
-      padding: 15px;
-      background: #f9f9f9;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    .product-summary span {
-      font-weight: bold;
-      color: #333;
-    }
-
-    /* Button */
-    button {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      color: white;
-      background: #4caf50;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-    }
-
-    button:hover {
-      background: #45a049;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Footer */
-    .footer {
-      text-align: center;
-      font-size: 14px;
-      color: #888;
-      margin-top: 30px;
-      padding: 15px 0;
-      background: #333;
-      color: white;
-    }
-
-    .footer p {
-      margin: 0;
-    }
-
-    .footer a {
-      color: #4caf50;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* Animation Effects */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    .container,
-    .header,
-    .footer {
-      animation: fadeIn 1s ease-in;
-    }
-  </style>
-</head>
-
-<body>
-  <!-- Header -->
-  <div class="header">
-    <h1>Sunshine Payment</h1>
-  </div>
-
-  <!-- Checkout Form -->
-  <div class="container">
-    <h2>Checkout</h2>
-    <form id="checkoutForm">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name" required>
-      </div>
-      <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
-      </div>
-      <div class="product-summary">
-        <p>Product: <span>Lucid Dream</span></p>
-        <p>Price: <span>₹597</span></p>
-      </div>
-      <button type="button" onclick="initiatePayment()">Place Order</button>
-    </form>
-  </div>
-
-  <!-- Footer -->
-  <div class="footer">
-    <p>Powered by <a href="https://www.phonepe.com/" target="_blank">PhonePe</a></p>
-  </div>
-
-  <script>
-    async function initiatePayment() {
-      const name = document.getElementById("name").value;
-      const phone = document.getElementById("phone").value;
-      const email = document.getElementById("email").value;
-
-      if (!name || !phone || !email) {
-        alert("Please fill out all fields.");
-        return;
-      }
-
-      try {
-        const response = await fetch("http://localhost:9000/initiate-payment", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name,
-            phone,
-            email,
-            amount: 59700, // Amount in paise (₹597)
-          }),
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-          // Redirect to PhonePe payment URL
-          window.location.href = result.paymentUrl;
-        } else {
-          alert("Payment initiation failed: " + result.message);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razorpay Payment Integration</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
         }
-      } catch (error) {
-        alert("An error occurred: " + error.message);
-      }
-    }
-  </script>
-</body>
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+        input[type="text"], input[type="email"], input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #F37254;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #e34e35;
+        }
+        .alert {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
 
+    <div class="container">
+        <h2>Payment Form</h2>
+        
+        <!-- Error Alert -->
+        <div class="alert" id="error-alert">
+            Please fill out all fields.
+        </div>
+
+        <!-- User Info Form -->
+        <form id="user-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="number">Phone Number:</label>
+            <input type="tel" id="number" name="number" required><br>
+
+            <button type="button" id="pay-button">Proceed to Payment</button>
+        </form>
+    </div>
+
+    <script>
+        // Razorpay integration
+        document.getElementById('pay-button').addEventListener('click', function() {
+            // Collect user data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const number = document.getElementById('number').value;
+
+            // Check for empty fields
+            if (!name || !email || !number) {
+                document.getElementById('error-alert').style.display = 'block';
+                return;
+            } else {
+                document.getElementById('error-alert').style.display = 'none';
+            }
+
+            // Prepare Razorpay payment options
+            const options = {
+                key: 'rzp_test_9kiyI2MhvW6oV8', // Replace with your Razorpay API key
+                amount: 50000, // Amount in paise (50000 paise = ₹500)
+                currency: 'INR',
+                name: 'Test Payment',
+                description: 'Payment for test',
+                image: 'https://your-logo-url.com/logo.png', // Optional, your logo
+                handler: function(response) {
+                    // Handle payment success here
+                    alert('Payment Successful! Razorpay Payment ID: ' + response.razorpay_payment_id);
+                    window.location.href = 'success.html'; // Redirect to success page
+                },
+                prefill: {
+                    name: name,
+                    email: email,
+                    contact: number
+                },
+                theme: {
+                    color: '#F37254' // Optional, customize button color
+                }
+            };
+
+            // Create Razorpay payment instance
+            const razorpay = new Razorpay(options);
+            razorpay.open();
+        });
+    </script>
+</body>
 </html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+        }
+        h1 {
+            color: #28a745;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn:active {
+            background-color: #004085;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Payment Successfully Done!</h1>
+        <p>Thank you for your payment. Your transaction was successful!</p>
+        <button class="btn" id="downloadButton" onclick="downloadPDF()">Download Invoice</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Add content to PDF
+            doc.text("Payment Success Invoice", 20, 30);
+            doc.text("---------------------------------------------------", 20, 40);
+            doc.text("Transaction ID: 123456789", 20, 50);
+            doc.text("Amount Paid: ₹5000", 20, 60);
+            doc.text("Date: " + new Date().toLocaleDateString(), 20, 70);
+            doc.text("Thank you for your purchase!", 20, 80);
+            doc.text("---------------------------------------------------", 20, 90);
+            doc.text("This invoice is generated automatically.", 20, 100);
+
+            // Save the PDF
+            doc.save('payment_invoice.pdf');
+        }
+
+        // Automatically trigger the PDF download when the page loads
+        window.onload = function() {
+            downloadPDF();
+        }
+    </script>
+</body>
+</html>
