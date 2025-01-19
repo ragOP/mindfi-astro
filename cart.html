@@ -6,37 +6,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PhonePe Checkout</title>
   <style>
+    /* General Styles */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f8f9fa;
+      background: linear-gradient(to bottom right, #f9f9f9, #e6e6e6);
+      color: #333;
     }
 
+    /* Header */
+    .header {
+      background: #4caf50;
+      color: white;
+      padding: 15px 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+
+    /* Container */
     .container {
       max-width: 400px;
-      margin: 20px auto;
+      margin: 30px auto;
       padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .container:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
     }
 
     h2 {
       text-align: center;
+      color: #4caf50;
+      font-size: 20px;
       margin-bottom: 20px;
-      color: #333;
     }
 
+    /* Form Styles */
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     label {
       display: block;
       font-size: 14px;
-      margin-bottom: 5px;
-      color: #555;
+      margin-bottom: 8px;
+      color: #666;
     }
 
     input {
@@ -44,47 +73,102 @@
       padding: 10px;
       font-size: 14px;
       border: 1px solid #ddd;
-      border-radius: 5px;
+      border-radius: 8px;
+      transition: border-color 0.3s;
     }
 
+    input:focus {
+      border-color: #4caf50;
+      outline: none;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+
+    /* Product Summary */
     .product-summary {
-      margin-bottom: 20px;
-      padding: 10px;
-      background: #f1f1f1;
-      border-radius: 5px;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      border: 1px solid #ddd;
       font-size: 14px;
+      margin-bottom: 20px;
     }
 
     .product-summary span {
       font-weight: bold;
+      color: #333;
     }
 
+    /* Button */
     button {
       width: 100%;
       padding: 12px;
       font-size: 16px;
-      color: #fff;
+      color: white;
       background: #4caf50;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
     }
 
     button:hover {
       background: #45a049;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
     }
 
+    /* Footer */
     .footer {
       text-align: center;
-      font-size: 12px;
+      font-size: 14px;
       color: #888;
-      margin-top: 20px;
+      margin-top: 30px;
+      padding: 15px 0;
+      background: #333;
+      color: white;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+
+    .footer a {
+      color: #4caf50;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Animation Effects */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .container,
+    .header,
+    .footer {
+      animation: fadeIn 1s ease-in;
     }
   </style>
 </head>
 
 <body>
+  <!-- Header -->
+  <div class="header">
+    <h1>Sunshine Payment</h1>
+  </div>
+
+  <!-- Checkout Form -->
   <div class="container">
     <h2>Checkout</h2>
     <form id="checkoutForm">
@@ -106,9 +190,11 @@
       </div>
       <button type="button" onclick="initiatePayment()">Place Order</button>
     </form>
-    <div class="footer">
-      <p>Powered by PhonePe</p>
-    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Powered by <a href="https://www.phonepe.com/" target="_blank">PhonePe</a></p>
   </div>
 
   <script>
@@ -122,24 +208,28 @@
         return;
       }
 
-      const response = await fetch("http://localhost:9000/initiate-payment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          phone,
-          email,
-          amount: 59700, // Amount in paise (₹597)
-        }),
-      });
+      try {
+        const response = await fetch("http://localhost:9000/initiate-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            phone,
+            email,
+            amount: 59700, // Amount in paise (₹597)
+          }),
+        });
 
-      const result = await response.json();
+        const result = await response.json();
 
-      if (result.success) {
-        // Redirect to PhonePe payment URL
-        window.location.href = result.paymentUrl;
-      } else {
-        alert("Payment initiation failed: " + result.message);
+        if (result.success) {
+          // Redirect to PhonePe payment URL
+          window.location.href = result.paymentUrl;
+        } else {
+          alert("Payment initiation failed: " + result.message);
+        }
+      } catch (error) {
+        alert("An error occurred: " + error.message);
       }
     }
   </script>
