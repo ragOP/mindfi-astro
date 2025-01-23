@@ -3765,11 +3765,9 @@
                                         class="w-100"
                                       />
                                       <button
-                                        data-integration_id="704"
                                         type="button"
                                         class="d-none btn btn-success btn-lg ft-payment-orderButton w-100 mt-3"
-                                        data-apitype="razorpay"
-                                        id="place_order"
+                                       
                                       >
                                         Complete Order
                                         <i class="fas fa-arrow-circle-right"></i>
@@ -3782,10 +3780,9 @@
                                 <button
                                   type="button"
                                   class="btn btn-success btn-lg ft-payment-orderButton w-100 mt-3"
-                                  data-apitype="razorpay"
-                                  data-integration_id="704"
+                                  id="place_order"
                                 >
-                                  Complete Order
+                                  Complete Order22
                                   <i class="fas fa-arrow-circle-right"></i>
                                 </button>
                               </div>
@@ -4749,10 +4746,10 @@
       const firstName = document.getElementById("firsttname");
       const email = document.getElementById("email");
       const phoneNumber = document.getElementById("phone");
-      const amount = document.getElementById("amount"); // Assuming you have an amount input field
+      const amount = document.getElementById("amount");
       const payButton = document.getElementById("place_order");
     
-      console.log(firstName, "First Name");
+      console.log(payButton, "First Name");
     
       payButton.addEventListener("click", (e) => {
         e.preventDefault();
@@ -4760,28 +4757,24 @@
         const nameValue = firstName.value;
         const emailValue = email.value;
         const phoneValue = phoneNumber.value;
-        const amountValue = 541; // Static or fetched amount
+        const amountValue = 399;
     
-        console.log(nameValue, emailValue, phoneValue, amountValue, "Values");
     
         if (!nameValue || !emailValue || !phoneValue || !amountValue) {
           alert("All fields are required!");
           return;
         }
-    
-        // Construct the query parameters
         const queryParams = new URLSearchParams({
           name: nameValue,
           email: emailValue,
           phone: phoneValue,
           amount: amountValue,
         }).toString();
-    
-        // Redirect the user to the new URL
+  
         const redirectUrl = `https://phonepe-be.onrender.com/pay?${queryParams}`;
         console.log("Redirecting to:", redirectUrl);
     
-        window.location.href = redirectUrl; // Redirect to the URL
+        window.location.href = redirectUrl;
       });
     </script>
   </body>
