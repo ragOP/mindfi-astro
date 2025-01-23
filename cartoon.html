@@ -3606,7 +3606,7 @@
                                 type="text"
                                 name="first_name"
                                 placeholder="First Name"
-                                id="itzv6"
+                                id="firsttname"
                                 required=""
                                 class="ft-form-ctl ft-input-vstyle pholder_flexiOrderForm_MzV9X"
                               />
@@ -3620,7 +3620,7 @@
                                 name="email"
                                 placeholder="Email ID"
                                 required="true"
-                                id="iy2xa"
+                                id="email"
                                 class="ft-form-ctl ft-input-vstyle pholder_flexiOrderForm_MzV9X"
                               />
                             </div>
@@ -3633,7 +3633,7 @@
                                 name="phone"
                                 placeholder="Phone Number"
                                 value=""
-                                id="irtg7"
+                                id="phone"
                                 country-code="in"
                                 required=""
                                 class="ft-input-height ft-form-ctl ft-input-vstyle pholder_flexiOrderForm_MzV9X"
@@ -3669,7 +3669,7 @@
                                 <th width="70%" class="ft-itemlabel">Item</th>
                                 <th
                                   width="30%"
-                                  id="io93e"
+                                  id="amount"
                                   class="ft-pricelabel"
                                 >
                                   Price
@@ -3682,8 +3682,8 @@
                                     class="ft-pricelist mr-2"
                                     type="radio"
                                     name="pricing_id"
-                                    data-price="199"
-                                    data-title="5 Years Numerology Report"
+                                    data-price="399"
+                                    data-title="Advanced Life Mastery Numerology Report (Today Only Offer)"
                                     data-currency="INR"
                                     value="gz5d2qe1ep2m63ko"
                                     checked=""
@@ -3748,7 +3748,7 @@
                                         class="form-check-label"
                                         for="ft-paylist_0704"
                                       >
-                                        Razorpay
+                                        Phonepe
                                       </label>
                                     </div>
                                   </div>
@@ -3756,7 +3756,7 @@
                                 <main>
                                   <div class="ft-pay-block">
                                     <div
-                                      id="razorpay_block_0"
+                                 
                                       class="ft-payblk-com text-center mt-3"
                                       style=""
                                     >
@@ -3768,7 +3768,8 @@
                                         data-integration_id="704"
                                         type="button"
                                         class="d-none btn btn-success btn-lg ft-payment-orderButton w-100 mt-3"
-                                        data-apitype="phonepe"
+                                        data-apitype="razorpay"
+                                        id="place_order"
                                       >
                                         Complete Order
                                         <i class="fas fa-arrow-circle-right"></i>
@@ -3794,7 +3795,7 @@
                     </form>
                   </div>
                   <h2 id="icoj7i" class="ftsub_heading">
-                    ⚠️ Last 3 Discounted Reports Left for<font
+                    ⚠️ Last 3 Discounted Reports Left for <font
                       ><span custom-sel="edd" class="ffshort-time"
                         ><font color="#ff0000">{Day, DD MM YYYY}</font></span
                       ></font
@@ -4744,5 +4745,44 @@
     <div class="flexiproof" id="874">
       <script defer="" src="js2/widget.js"></script>
     </div>
+    <script>
+      const firstName = document.getElementById("firsttname");
+      const email = document.getElementById("email");
+      const phoneNumber = document.getElementById("phone");
+      const amount = document.getElementById("amount"); // Assuming you have an amount input field
+      const payButton = document.getElementById("place_order");
+    
+      console.log(firstName, "First Name");
+    
+      payButton.addEventListener("click", (e) => {
+        e.preventDefault();
+    
+        const nameValue = firstName.value;
+        const emailValue = email.value;
+        const phoneValue = phoneNumber.value;
+        const amountValue = 541; // Static or fetched amount
+    
+        console.log(nameValue, emailValue, phoneValue, amountValue, "Values");
+    
+        if (!nameValue || !emailValue || !phoneValue || !amountValue) {
+          alert("All fields are required!");
+          return;
+        }
+    
+        // Construct the query parameters
+        const queryParams = new URLSearchParams({
+          name: nameValue,
+          email: emailValue,
+          phone: phoneValue,
+          amount: amountValue,
+        }).toString();
+    
+        // Redirect the user to the new URL
+        const redirectUrl = `https://phonepe-be.onrender.com/pay?${queryParams}`;
+        console.log("Redirecting to:", redirectUrl);
+    
+        window.location.href = redirectUrl; // Redirect to the URL
+      });
+    </script>
   </body>
 </html>
