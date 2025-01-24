@@ -48,13 +48,8 @@
         }
         .tabs-container {
             background-color: #ffffff;
-            padding: 20px;
             margin: 20px auto;
-            width: 80%;
-            max-width: 600px;
-            border-radius: 8px;
-            border: 2px solid #000000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 90%;
         }
         .tabs-container-below {
             background-color: #ffffff;
@@ -79,7 +74,7 @@
         }
         input[type="text"], input[type="email"] {
             width: 100%;
-            padding: 12px 15px;
+            padding: 20px 25px;
             font-size: 16px;
             border: 1px solid #CCCCCC;
             border-radius: 8px;
@@ -184,6 +179,148 @@
             text-decoration: underline;
         }
     </style>
+    <style>
+        
+
+        .form-container {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-header {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab-header div {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .tab-header .active {
+            font-weight: bold;
+            border-top: 2px solid black;
+        }
+
+        .tab-content {
+            padding: 20px;
+        }
+
+        .tab-content.hidden {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            font-weight: 200;
+        }
+
+        .form-group input {
+            width: 90%;
+            padding: 15px 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #333;
+        }
+        .payment-summary {
+            padding: 5px;
+            margin-bottom: 15px;
+        }
+
+        .payment-summary h4 {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+
+        .payment-summary .product {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgb(183, 183, 183);
+            padding-bottom: 15px;
+        }
+
+        .upgrade-option {
+            border: 1px solid #707070;
+            padding: 25px 35px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .upgrade-option h5 {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+
+        .upgrade-option ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 10px;
+            text-align: left;
+        }
+
+        .upgrade-option ul li {
+            margin-bottom: 5px;
+        }
+
+        .payment-options img {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .place-order {
+            width: 100%;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .place-order:hover {
+            background-color: #333;
+        }
+        .warning-phone, .warning-email, .warning-fullname {
+            font-size: 10px;
+            font-weight: 100;
+            color: red;
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -193,7 +330,75 @@
         Unlock the exclusive bonuses, Now!
     </div>
     <div class="tabs-container">
-       
+        <div class="form-container">
+            <div class="tab-header">
+                <div class="tab-link active" data-tab="contact">1 Contact</div>
+                <div class="tab-link" data-tab="payment">2 Payment</div>
+            </div>
+            <div class="tab-content" id="contact">
+                <div class="form-group">
+                    <label for="full-name">Full Name *</label>
+                    <input type="text" id="full-name">
+                    <p class="warning-fullname">Full Name is required</p>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone *</label>
+                    <input type="text" id="phone">
+                    <p class="warning-phone">Phone number is required</p>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address *</label>
+                    <input type="email" id="email">
+                    <p class="warning-email">Email is required</p>
+                </div>
+                <button class="submit-button">
+                    <img width="20px" src="./arrow.png" alt="">
+                    NEXT STEP 
+                    <br> 
+                    <span style="font-size: 12px;">Yes! I want this offer!</span></button>
+            </div>
+            <div class="tab-content hidden" id="payment">
+                <div class="payment-summary">
+                    <h4>Product Summary</h4>
+                    <div class="product">
+                        <span style="display: flex; width: 100%; align-items: center;"><img style="width: 60px; margin-right: 5px;" src="https://heavygain.in/wp-content/uploads/2024/08/Untitled-design-9-300x300.webp" alt="">Heavy Duty <br> Manual + FREE <br> BONUS 🤩</span>
+                        <span>₹199.00</span>
+                    </div>
+                    <div class="product">
+                        <strong>SubTotal</strong>
+                        <strong>₹199.00</strong>
+                    </div>
+                    <div class="product">
+                        <strong>Total</strong>
+                        <strong>₹199.00</strong>
+                    </div>
+                </div>
+        
+                <div class="upgrade-option">
+                    <h5>39% of customers choose this option to get 2X faster results!</h5>
+                    <h5>What you'll get in this One-Time Upgrade:</h5>
+                    <ul>
+                        <li>✅ Low-Budget Diet Plan from Professional Bodybuilders</li>
+                        <li>✅ Heavy Duty Cardio Plan for Cutting</li>
+                        <li>✅ Expert-Approved Fat Loss Diet Plan</li>
+                        <li>✅ Get Abs & Sharp Jawline in 30 Days</li>
+                    </ul>
+                    <p>All for just ₹168 to accelerate your transformation!</p>
+                    <em><p>PS: This exclusive offer is only available on this page. Don’t miss out!</p></em>
+                    <label><input type="checkbox"> Yes, I want to get 2X value!</label>
+                </div>
+        
+                <div class="payment-options">
+                    <img src="./phonepe.png" alt="PhonePe Payment Options">
+                </div>
+                <p style="font-size: 10px; color: gray;">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="" style="color: red;" >privacy policy</a>.</p>
+        
+                <button class="place-order">
+                    <img width="30px" src="./lock.png" alt="" style="margin-bottom: 10px;">
+                    <p style="margin: 0;">Place Order ₹199.00</p>
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- Accordion Section -->
@@ -250,6 +455,61 @@
                 }
             });
         }
+    </script>
+    <script>
+        const tabs = document.querySelectorAll('.tab-link');
+        const contents = document.querySelectorAll('.tab-content');
+        const fullName = document.getElementById('full-name');
+        const phone = document.getElementById('phone');
+        const email = document.getElementById('email');
+        const submitButton = document.querySelector('.submit-button');
+        const warningFullName = document.querySelector('.warning-fullname');
+        const warningPhone = document.querySelector('.warning-phone');
+        const warningEmail = document.querySelector('.warning-email');
+    
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                if(fullName.value == ""){
+                    warningEmail.style.display = 'block';
+                    return;
+                }
+                if(email.value == ""){
+                    warningEmail.style.display = 'block';
+                    return;
+                }
+                if(phone.value == ""){
+                    warningEmail.style.display = 'block';
+                    return;
+                }
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.add('hidden'));
+                tab.classList.add('active');
+                const target = document.getElementById(tab.dataset.tab);
+                target.classList.remove('hidden');
+            });
+        });
+
+        tabs.forEach(tab => {
+            submitButton.addEventListener('click', () => {
+                if(fullName.value == ""){
+                    warningEmail.style.display = 'block';
+                    return;
+                }
+                if(email.value == ""){
+                    warningEmail.style.display = 'block';
+                    return;
+                }
+                if(phone.value == ""){
+                    warningEmail.style.display = 'block';
+                    return;
+                }
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.add('hidden'));
+                tab.classList.add('active');
+                const target = document.getElementById(tab.dataset.tab);
+                target.classList.remove('hidden');
+            });
+        });
     </script>
 </body>
 </html>
