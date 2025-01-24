@@ -571,12 +571,13 @@
         const warningEmail = document.querySelector('.warning-email');
         const paymentBtn = document.getElementById('payment-btn');
 
-        let emailCheck = false;
-        let phoneCheck = false;
-        let fullNameCheck = false;
+        
     
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
+                let emailCheck = false;
+                let phoneCheck = false;
+                let fullNameCheck = false;
                 if(fullName.value == ""){
                     warningFullName.style.display = 'block';
                     fullName.style.border = '1px solid red';
@@ -605,20 +606,35 @@
 
         tabs.forEach(tab => {
             submitButton.addEventListener('click', () => {
+                let emailCheck = false;
+                let phoneCheck = false;
+                let fullNameCheck = false;
                 if(fullName.value == ""){
                     warningFullName.style.display = 'block';
                     fullName.style.border = '1px solid red';
                     fullNameCheck = true;
+                }else{
+                    warningFullName.style.display = 'none';
+                    fullName.style.border = '';
+                    fullNameCheck = false;
                 }
                 if(email.value == ""){
                     warningEmail.style.display = 'block';
                     email.style.border = '1px solid red';
                     emailCheck = true;
+                }else{
+                    warningEmail.style.display = 'none';
+                    email.style.border = '';
+                    emailCheck = false;
                 }
                 if(phone.value == ""){
                     warningPhone.style.display = 'block';
                     phone.style.border = '1px solid red';
                     phoneCheck = true;
+                }else{
+                    warningPhone.style.display = 'none';
+                    phone.style.border = '';
+                    phoneCheck = false;
                 }
                 if(emailCheck || phoneCheck || fullNameCheck){
                     return;
