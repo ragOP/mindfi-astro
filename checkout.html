@@ -320,6 +320,58 @@
             color: red;
             display: none;
         }
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column-reverse; /* Ensures new toasts appear at the bottom */
+            gap: 10px;
+        }
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.5s ease-out, fadeOut 0.5s ease-in 4.5s;
+            opacity: 1;
+        }
+        .toast img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .toast p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+        }
     </style>
 </head>
 <body>
@@ -434,6 +486,59 @@
     </div>
 
     <h6>2025- limited</h6>
+
+    <div class="toast-container" id="toast-container">
+        <!-- Toasts will appear here -->
+    </div>
+
+    <script>
+        const toastContainer = document.getElementById("toast-container");
+
+        // Toast messages array
+        const toastMessages = [
+            { name: "Aakash", city: "Chennai", product: "Heavy Duty Manual ₹199", image: "./1.jpg" },
+            { name: "Priya", city: "Mumbai", product: "Workout Guide ₹299", image: "./g1.jpg" },
+            { name: "Rahul", city: "Delhi", product: "Fitness Tracker ₹499", image: "./2.jpg" },
+            { name: "Sneha", city: "Pune", product: "Diet Plan ₹399", image: "./g2.jpg" },
+            { name: "Ravi", city: "Bangalore", product: "Yoga Guide ₹249", image: "./3.jpg"}
+        ];
+
+        let toastIndex = 0;
+
+        function showToast() {
+            // Remove the existing toast if present
+            const existingToast = document.querySelector(".toast");
+            if (existingToast) {
+                existingToast.remove();
+            }
+
+            // Get the current toast data
+            const toastData = toastMessages[toastIndex];
+
+            // Create a new toast
+            const toast = document.createElement("div");
+            toast.classList.add("toast");
+
+            toast.innerHTML = `
+                <img src="${toastData.image}" alt="User Image">
+                <p>${toastData.name} from ${toastData.city} has just purchased ${toastData.product}</p>
+            `;
+
+            // Append the toast to the container
+            toastContainer.appendChild(toast);
+
+            // Remove toast after 5 seconds
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+
+            // Increment the index to show the next toast, loop back to 0 if we reach the end
+            toastIndex = (toastIndex + 1) % toastMessages.length;
+        }
+
+        // Show a new toast every 3 seconds
+        setInterval(showToast, 6000);
+    </script>
 </div>
 
 <!-- Legal Links Section -->
