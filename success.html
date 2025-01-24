@@ -213,7 +213,7 @@
 </body>
 <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const transcation_Id = urlParams.get('transcation_Id');
+    const transcation_Id = urlParams.get('transaction_Id');
     const transactionNumber = document.querySelector('.order-number');
     if (transcation_Id && transactionNumber) {
         transactionNumber.innerHTML = transcation_Id;
