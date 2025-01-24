@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ultimate Heavy Duty Physique</title>
     <!-- Link to Google Fonts for Roboto -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: "Roboto", Sans-serif;
-            background-color: #FFFFFF; /* Set body background to white */
+            background-color: #FFFFFF;
         }
         header {
             background-color: #000000;
@@ -25,15 +25,15 @@
         }
         .bonus {
             background-color: #01B55E;
-            color: #FFFFFF; /* White text color for the bonus div */
+            color: #FFFFFF;
             font-weight: 600;
             text-align: center;
             padding: 10px;
             position: relative;
             margin: 20px auto;
-            width: 80%; /* Smaller width */
-            max-width: 400px; /* Restrict max width */
-            border-radius: 8px; /* Rounded corners for better appearance */
+            width: 80%;
+            max-width: 400px;
+            border-radius: 8px;
         }
         .bonus::after {
             content: "";
@@ -44,17 +44,145 @@
             height: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-top: 10px solid #01B55E; /* Same green color for the arrow */
-        } .tabs-container {
+            border-top: 10px solid #01B55E;
+        }
+        .tabs-container {
             background-color: #ffffff;
             padding: 20px;
             margin: 20px auto;
             width: 80%;
             max-width: 600px;
             border-radius: 8px;
-          
+            border: 2px solid #000000;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }   
+        }
+        .tabs-container-below {
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+      
+            /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333333;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid #CCCCCC;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        input[type="text"]:focus, input[type="email"]:focus {
+            border-color: #01B55E;
+            box-shadow: 0 0 5px rgba(1, 181, 94, 0.5);
+        }
+        button {
+            padding: 12px 15px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #FFFFFF;
+            background-color: #000000;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #333333;
+        }
+        /* Accordion Styling */
+        .accordion {
+            background-color: #ffffff;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.3s ease;
+        }
+
+        .accordion.active, .accordion:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .accordion span {
+            font-size: 20px;
+        }
+
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: #fff;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: #fff;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* Money Back Guarantee Section */
+        .money-back {
+            background-color: #000000;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 20px;
+            font-weight: 600;
+            font-size: 18px;
+            margin-top: 40px;
+        }
+        .money-back img {
+            display: block;
+            margin: 20px auto;
+            width: 100px; /* Adjust width as per image size */
+            height: auto;
+        }
+
+        /* Legal Links Section */
+        .legal-links {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .legal-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+           
+        }
+        .legal-links a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -65,7 +193,63 @@
         Unlock the exclusive bonuses, Now!
     </div>
     <div class="tabs-container">
-        
+       
     </div>
+
+    <!-- Accordion Section -->
+    <div class="tabs-container-below">
+        <button class="accordion">
+            If I don’t have PhonePe, how can I pay contact Details
+            <span class="toggle-icon">+</span>
+        </button>
+        <div class="panel">
+            <p>Don’t worry! You can use any UPI app like GPay, Paytm, or BHIM. Simply click on <em>Place Order</em> and select the UPI app of your choice to complete the payment.</p>
+        </div>
+
+        <button class="accordion">
+            How will I get the ebook and free bonuses?
+            <span class="toggle-icon">+</span>
+        </button>
+        <div class="panel">
+            <p>Once your payment is successful, you will receive an email with a download link for the ebook and all bonuses. Check your inbox or spam folder if you don’t see it.</p>
+        </div>
+    </div>
+  <!-- Money Back Guarantee Section -->
+  <div class="money-back">
+    <p>100% MONEY BACK GUARANTEE</p>
+    <img src="pic.wbep.webp" alt="Money Back Guarantee" />
+  
+  <h5>
+    "If this Heavy Duty Workout plan doesn't exceed your expectations, I'll personally ensure you get 100% of your money back. No questions, no hassle. That's my commitment to you!"
+  </h5>
+    <div class="legal-links">
+        <a href="#"><h5>Privacy Policy</h5></a>
+
+     
+    </div>
+
+    <h6>2025- limited</h6>
+</div>
+
+<!-- Legal Links Section -->
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                var icon = this.querySelector(".toggle-icon");
+
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                    icon.textContent = "+";  // Change to plus when closed
+                } else {
+                    panel.style.display = "block";
+                    icon.textContent = "-";  // Change to minus when opened
+                }
+            });
+        }
+    </script>
 </body>
 </html>
