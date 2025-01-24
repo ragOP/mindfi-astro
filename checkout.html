@@ -393,7 +393,7 @@
                 </div>
                 <p style="font-size: 10px; color: gray;">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="" style="color: red;" >privacy policy</a>.</p>
         
-                <button class="place-order">
+                <button class="place-order" id="payment-btn">
                     <img width="30px" src="./lock.png" alt="" style="margin-bottom: 10px;">
                     <p style="margin: 0;">Place Order ₹199.00</p>
                 </button>
@@ -466,19 +466,30 @@
         const warningFullName = document.querySelector('.warning-fullname');
         const warningPhone = document.querySelector('.warning-phone');
         const warningEmail = document.querySelector('.warning-email');
+        const paymentBtn = document.getElementById('payment-btn');
+
+        let emailCheck = false;
+        let phoneCheck = false;
+        let fullNameCheck = false;
     
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 if(fullName.value == ""){
-                    warningEmail.style.display = 'block';
-                    return;
+                    warningFullName.style.display = 'block';
+                    fullName.style.border = '1px solid red';
+                    fullNameCheck = true;
                 }
                 if(email.value == ""){
                     warningEmail.style.display = 'block';
-                    return;
+                    email.style.border = '1px solid red';
+                    emailCheck = true;
                 }
                 if(phone.value == ""){
-                    warningEmail.style.display = 'block';
+                    warningPhone.style.display = 'block';
+                    phone.style.border = '1px solid red';
+                    phoneCheck = true;
+                }
+                if(emailCheck || phoneCheck || fullNameCheck){
                     return;
                 }
                 tabs.forEach(t => t.classList.remove('active'));
@@ -492,15 +503,21 @@
         tabs.forEach(tab => {
             submitButton.addEventListener('click', () => {
                 if(fullName.value == ""){
-                    warningEmail.style.display = 'block';
-                    return;
+                    warningFullName.style.display = 'block';
+                    fullName.style.border = '1px solid red';
+                    fullNameCheck = true;
                 }
                 if(email.value == ""){
                     warningEmail.style.display = 'block';
-                    return;
+                    email.style.border = '1px solid red';
+                    emailCheck = true;
                 }
                 if(phone.value == ""){
-                    warningEmail.style.display = 'block';
+                    warningPhone.style.display = 'block';
+                    phone.style.border = '1px solid red';
+                    phoneCheck = true;
+                }
+                if(emailCheck || phoneCheck || fullNameCheck){
                     return;
                 }
                 tabs.forEach(t => t.classList.remove('active'));
@@ -510,6 +527,17 @@
                 target.classList.remove('hidden');
             });
         });
+
+        paymentBtn.addEventListener('click', () => {
+            const queryParams = new URLSearchParams({
+			name: fullName,
+			email: email,
+			phone: phone,
+			amount: 2,
+		}).toString();
+		const redirectUrl = `https://phonepe-be.onrender.com/pay?${queryParams}`;
+		window.location.href = redirectUrl;
+        })
     </script>
 </body>
 </html>
