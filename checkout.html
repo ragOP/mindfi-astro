@@ -299,7 +299,7 @@
         .place-order {
     width: 100%;
     /* padding: 10px; */
-    background: linear-gradient(60deg, #37f432, #05b2cc, #37c800, #3cd586, #49822a, #77f733, #4e570d);
+    background: linear-gradient(60deg, #37f432,  #37c800,  #49822a, #77f733);
     color: white;
     text-align: center;
     font-weight: bold;
@@ -307,7 +307,18 @@
     border-radius: 4px;
     cursor: pointer;
     background-size: 200%;
-    animation: shimmer 15s ease infinite;
+        animation: btnAnimation 5s ease infinite;
+    }
+    
+    @keyframes btnAnimation {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
 }
 
 /* Shimmer animation */
