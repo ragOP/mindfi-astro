@@ -13,6 +13,7 @@
             font-family: "Roboto", Sans-serif;
             background-color: #FFFFFF;
         }
+        
         header {
             background-color: #000000;
             color: #FFFFFF;
@@ -202,7 +203,8 @@
 
         .tab-header .active {
             font-weight: bold;
-            border-top: 2px solid black;
+            border-top: 1px solid black;
+            border-right: 1px solid rgb(0, 0, 0);
         }
 
         .tab-content {
@@ -310,26 +312,8 @@
         animation: btnAnimation 5s ease infinite;
     }
     
-    @keyframes btnAnimation {
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-}
+   
 
-/* Shimmer animation */
-@keyframes shimmer {
-    0% {
-        background-position: -100% 0;
-    }
-    100% {
-        background-position: 200% 0;
-    }
-}
 
 
         .place-order:hover {
@@ -396,6 +380,18 @@
                 transform: translateX(20px);
             }
         }
+
+        /* Shimmer animation */
+@keyframes shimmer {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+
     </style>
  
 </head>
@@ -510,11 +506,11 @@
 
         // Toast messages array
         const toastMessages = [
-            { name: "Aakash", city: "Chennai", product: "Heavy Duty Manual ₹199", image: "./1.jpg" },
-            { name: "Priya", city: "Mumbai", product: "Workout Guide ₹299", image: "./g1.jpg" },
-            { name: "Rahul", city: "Delhi", product: "Fitness Tracker ₹499", image: "./2.jpg" },
-            { name: "Sneha", city: "Pune", product: "Diet Plan ₹399", image: "./g2.jpg" },
-            { name: "Ravi", city: "Bangalore", product: "Yoga Guide ₹249", image: "./3.jpg"}
+            { name: "Aakash", city: "Chennai", product: "Lucid Mastery Course!", image: "./1.jpg" },
+            { name: "Priya", city: "Mumbai", product: "Lucid Mastery Course!", image: "./g1.jpg" },
+            { name: "Rahul", city: "Delhi", product: "Lucid Mastery Course!", image: "./2.jpg" },
+            { name: "Sneha", city: "Pune", product: "Lucid Mastery Course!", image: "./g2.jpg" },
+            { name: "Ravi", city: "Bangalore", product: "Lucid Mastery Course!", image: "./3.jpg"}
         ];
 
         let toastIndex = 0;
