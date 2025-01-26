@@ -28,6 +28,7 @@
     }
     .filters {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
       margin-bottom: 20px;
     }
@@ -35,6 +36,18 @@
       padding: 5px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      width: 180px;
+    }
+    .filters button {
+      padding: 5px 10px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .filters button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
@@ -47,6 +60,8 @@
     <input type="text" id="filterName" placeholder="Filter by Name">
     <input type="text" id="filterEmail" placeholder="Filter by Email">
     <input type="text" id="filterPhoneNumber" placeholder="Filter by Phone Number">
+    <input type="number" id="filterMinAmount" placeholder="Min Amount">
+    <input type="number" id="filterMaxAmount" placeholder="Max Amount">
     <button onclick="applyFilters()">Apply Filters</button>
     <button onclick="resetFilters()">Reset Filters</button>
   </div>
@@ -118,13 +133,16 @@
       const nameFilter = document.getElementById("filterName").value.toLowerCase();
       const emailFilter = document.getElementById("filterEmail").value.toLowerCase();
       const phoneNumberFilter = document.getElementById("filterPhoneNumber").value;
+      const minAmount = parseFloat(document.getElementById("filterMinAmount").value) || 0; // Default to 0 if empty
+      const maxAmount = parseFloat(document.getElementById("filterMaxAmount").value) || Infinity; // Default to Infinity if empty
 
       const filteredPayments = paymentsData.filter(payment => {
         return (
           (!transactionIdFilter || payment.transcationId.toLowerCase().includes(transactionIdFilter)) &&
           (!nameFilter || payment.name.toLowerCase().includes(nameFilter)) &&
           (!emailFilter || payment.email.toLowerCase().includes(emailFilter)) &&
-          (!phoneNumberFilter || payment.phoneNumber.includes(phoneNumberFilter))
+          (!phoneNumberFilter || payment.phoneNumber.includes(phoneNumberFilter)) &&
+          (payment.amount >= minAmount && payment.amount <= maxAmount)
         );
       });
 
@@ -137,6 +155,8 @@
       document.getElementById("filterName").value = "";
       document.getElementById("filterEmail").value = "";
       document.getElementById("filterPhoneNumber").value = "";
+      document.getElementById("filterMinAmount").value = "";
+      document.getElementById("filterMaxAmount").value = "";
       renderTable(paymentsData); // Show original data
     }
 
