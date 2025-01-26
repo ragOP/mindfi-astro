@@ -51,13 +51,35 @@
 		<!-- All in One SEO -->
 
 	<!-- Pixel Cat Facebook Pixel Code -->
-	<script>
-	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-	document,'script','https://connect.facebook.net/en_US/fbevents.js' );
-	fbq( 'init', '621689377052514' );	</script>
+	 <script>
+    // Function to track website visits
+    async function trackVisit() {
+      const websiteId = "121"; // Replace with your unique website ID
+      try {
+        const response = await fetch('https://phonepe-be.onrender.com/api/user/website/visit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ websiteId }),
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          console.log("Visit tracked successfully");
+        } else {
+          console.error("Failed to track visit:", data.message);
+        }
+      } catch (error) {
+        console.error("Error tracking visit:", error);
+      }
+    }
+
+    // Track visit on page load
+    window.onload = () => {
+      trackVisit();
+    };
+  </script>
 	<!-- DO NOT MODIFY -->
 	<!-- End Facebook Pixel Code -->
 	<script>window._wca = window._wca || [];</script>
