@@ -317,6 +317,14 @@ input, select, textarea {
             display: block;
         }
 
+        @keyframes glow {
+        0% {
+            box-shadow: 0 0 5px #37c800, 0 0 10px #37c800, 0 0 15px #37c800;
+        }
+        100% {
+            box-shadow: 0 0 10px #72ff00, 0 0 20px #72ff00, 0 0 30px #72ff00;
+        }
+    }
         .place-order {
     width: 100%;
     padding: 14px;
@@ -327,7 +335,6 @@ input, select, textarea {
     border: none;
     border-radius: 100px 100px 100px 100px;
     cursor: pointer;
-    -webkit-animation: glow 1.5s infinite alternate;
     animation: glow 1.5s infinite alternate;
     /* margin-bottom: 100px; */
     background-size: 200%;
