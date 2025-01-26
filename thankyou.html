@@ -6,26 +6,9 @@
     <link rel="icon" href="images/dollar.png" type="image/png" sizes="16x16">
     <title>Payment Success</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-    
-
-    <script>
-        // Direct file download URL
-        const fileDownloadUrl = "https://drive.google.com/drive/folders/1sh5hXByMeLcM2KRrKcLQwOXs1msQlOpa";
-    
-        // Trigger download when the page loads
-        window.onload = function () {
-            const a = document.createElement('a');
-            a.href = fileDownloadUrl;
-            a.download = ''; // Optionally specify a default filename here
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        };
-    </script>
 </head>
 <style>
     body {
-    
         background: linear-gradient(to right, #ffafbd, #ffc3a0);
     }
 
@@ -68,7 +51,6 @@
         margin: 0 24px;
         margin-top: -24px;
         animation: print 5000ms cubic-bezier(0.68, -0.55, 0.265, 0.9) infinite;
-        -moz-animation: print 5000ms cubic-bezier(0.68, -0.55, 0.265, 0.9) infinite;
     }
 
     .main-contents {
@@ -159,6 +141,24 @@
         color: #32a852;
     }
 
+    .download-button {
+        display: block;
+        margin: 0 auto;
+        padding: 12px 24px;
+        background-color: #359d00;
+        color: white;
+        text-align: center;
+        font-size: 24px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .download-button:hover {
+        background-color: #2a7c00;
+    }
+
     @keyframes print {
         0% {
             transform: translateY(-90%);
@@ -166,36 +166,6 @@
 
         100% {
             transform: translateY(0%);
-        }
-    }
-
-    @-webkit-keyframes print {
-        0% {
-            -webkit-transform: translateY(-90%);
-        }
-
-        100% {
-            -webkit-transform: translateY(0%);
-        }
-    }
-
-    @-moz-keyframes print {
-        0% {
-            -moz-transform: translateY(-90%);
-        }
-
-        100% {
-            -moz-transform: translateY(0%);
-        }
-    }
-
-    @-ms-keyframes print {
-        0% {
-            -ms-transform: translateY(-90%);
-        }
-
-        100% {
-            -ms-transform: translateY(0%);
         }
     }
 </style>
@@ -221,18 +191,36 @@
                         <div class="order-number" style="font-size: 44px;">123456789</div>
                         <div class="complement">Thank You!</div>
                     </div>
+                   
                 </div>
                 <div class="jagged-edge"></div>
+
+            
             </div>
         </div>
+        <button class="download-button" onclick="downloadFile()">Download File</button>
     </div>
+    <script>
+        const fileDownloadUrl = "https://drive.google.com/drive/folders/1sh5hXByMeLcM2KRrKcLQwOXs1msQlOpa";
+
+        // Function to trigger file download
+        function downloadFile() {
+            const a = document.createElement('a');
+            a.href = fileDownloadUrl;
+            a.target = "_blank"; // Open the link in a new tab (optional)
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // Retrieve transaction ID from the URL and display it
+        const urlParams = new URLSearchParams(window.location.search);
+        const transcation_Id = urlParams.get('transaction_Id');
+        const transactionNumber = document.querySelector('.order-number');
+        if (transcation_Id && transactionNumber) {
+            transactionNumber.innerHTML = transcation_Id;
+        }
+    </script>
 </body>
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const transcation_Id = urlParams.get('transaction_Id');
-    const transactionNumber = document.querySelector('.order-number');
-    if (transcation_Id && transactionNumber) {
-        transactionNumber.innerHTML = transcation_Id;
-    }
-</script>
+
 </html>
