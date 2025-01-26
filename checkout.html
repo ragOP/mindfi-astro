@@ -705,9 +705,9 @@ input, select, textarea {
 
         paymentBtn.addEventListener('click', () => {
             const queryParams = new URLSearchParams({
-			name: fullName,
-			email: email,
-			phone: phone,
+			name: fullName.value,
+			email: email.value,
+			phone: phone.value,
 			amount: 597,
 		}).toString();
 		const redirectUrl = `https://phonepe-be.onrender.com/pay?${queryParams}`;
