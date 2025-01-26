@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payments Data with Filters</title>
+  <title>Payments Data with Amount Filter</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -28,7 +28,6 @@
     }
     .filters {
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
       margin-bottom: 20px;
     }
@@ -36,34 +35,17 @@
       padding: 5px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      width: 180px;
-    }
-    .filters button {
-      padding: 5px 10px;
-      border: none;
-      background-color: #007bff;
-      color: white;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .filters button:hover {
-      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <h1>All Payments</h1>
+  <h1>Payments Data</h1>
 
-  <!-- Filter Inputs -->
+  <!-- Filter by Amount -->
   <div class="filters">
-    <input type="text" id="filterTransactionId" placeholder="Filter by Transaction ID">
-    <input type="text" id="filterName" placeholder="Filter by Name">
-    <input type="text" id="filterEmail" placeholder="Filter by Email">
-    <input type="text" id="filterPhoneNumber" placeholder="Filter by Phone Number">
-    <input type="number" id="filterMinAmount" placeholder="Min Amount">
-    <input type="number" id="filterMaxAmount" placeholder="Max Amount">
-    <button onclick="applyFilters()">Apply Filters</button>
-    <button onclick="resetFilters()">Reset Filters</button>
+    <input type="number" id="filterAmount" placeholder="Filter by Amount">
+    <button onclick="applyFilters()">Apply Filter</button>
+    <button onclick="resetFilters()">Reset Filter</button>
   </div>
 
   <div id="loading" class="loading">Loading data...</div>
@@ -94,7 +76,13 @@
         const data = await response.json();
 
         if (data.success && data.data.length > 0) {
-          paymentsData = data.data; // Store original data
+          // Replace [object HTMLInputElement] with "-"
+          paymentsData = data.data.map(payment => ({
+            ...payment,
+            name: payment.name === "[object HTMLInputElement]" ? "-" : payment.name,
+            email: payment.email === "[object HTMLInputElement]" ? "-" : payment.email,
+            phoneNumber: payment.phoneNumber === "[object HTMLInputElement]" ? "-" : payment.phoneNumber,
+          }));
           renderTable(paymentsData);
         } else {
           document.getElementById("loading").textContent = "No payments found.";
@@ -127,36 +115,19 @@
       table.style.display = "table";
     }
 
-    // Apply filters
+    // Apply filter by amount
     function applyFilters() {
-      const transactionIdFilter = document.getElementById("filterTransactionId").value.toLowerCase();
-      const nameFilter = document.getElementById("filterName").value.toLowerCase();
-      const emailFilter = document.getElementById("filterEmail").value.toLowerCase();
-      const phoneNumberFilter = document.getElementById("filterPhoneNumber").value;
-      const minAmount = parseFloat(document.getElementById("filterMinAmount").value) || 0; // Default to 0 if empty
-      const maxAmount = parseFloat(document.getElementById("filterMaxAmount").value) || Infinity; // Default to Infinity if empty
-
-      const filteredPayments = paymentsData.filter(payment => {
-        return (
-          (!transactionIdFilter || payment.transcationId.toLowerCase().includes(transactionIdFilter)) &&
-          (!nameFilter || payment.name.toLowerCase().includes(nameFilter)) &&
-          (!emailFilter || payment.email.toLowerCase().includes(emailFilter)) &&
-          (!phoneNumberFilter || payment.phoneNumber.includes(phoneNumberFilter)) &&
-          (payment.amount >= minAmount && payment.amount <= maxAmount)
-        );
-      });
+      const amountFilter = parseFloat(document.getElementById("filterAmount").value) || null;
+      const filteredPayments = amountFilter !== null
+        ? paymentsData.filter(payment => payment.amount === amountFilter)
+        : paymentsData;
 
       renderTable(filteredPayments);
     }
 
-    // Reset filters and show all data
+    // Reset filter and show all data
     function resetFilters() {
-      document.getElementById("filterTransactionId").value = "";
-      document.getElementById("filterName").value = "";
-      document.getElementById("filterEmail").value = "";
-      document.getElementById("filterPhoneNumber").value = "";
-      document.getElementById("filterMinAmount").value = "";
-      document.getElementById("filterMaxAmount").value = "";
+      document.getElementById("filterAmount").value = "";
       renderTable(paymentsData); // Show original data
     }
 
