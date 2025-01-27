@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button and Website Views</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .section {
+            width: 45%;
+        }
+
+        select, p {
+            margin: 10px 0;
+        }
+
+        .loading {
+            font-style: italic;
+            color: gray;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="section" id="buttonViewsSection">
+        <h1>Button Views Dropdown</h1>
+        <div>
+            <label for="buttonDropdown">Select a Button ID:</label>
+            <select id="buttonDropdown" disabled>
+                <option value="">Loading...</option>
+            </select>
+        </div>
+        <p id="buttonClickedInfo" class="loading">Fetching data...</p>
+    </div>
+
+    <div class="section" id="websiteViewsSection">
+        <h1>Website Views Dropdown</h1>
+        <div>
+            <label for="websiteDropdown">Select a Website ID:</label>
+            <select id="websiteDropdown" disabled>
+                <option value="">Loading...</option>
+            </select>
+        </div>
+        <p id="websiteVisitedInfo" class="loading">Fetching data...</p>
+    </div>
+
+    <script>
+        const buttonApiUrl = 'https://phonepe-be.onrender.com/api/admin/get-all-button-views';
+        const websiteApiUrl = 'https://phonepe-be.onrender.com/api/admin/get-all-website-views';
+
+        const buttonDropdown = document.getElementById('buttonDropdown');
+        const buttonClickedInfo = document.getElementById('buttonClickedInfo');
+
+        const websiteDropdown = document.getElementById('websiteDropdown');
+        const websiteVisitedInfo = document.getElementById('websiteVisitedInfo');
+
+        async function fetchData(apiUrl, dropdown, infoElement, idKey, dataKey) {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (data.success) {
+                    populateDropdown(data.data, dropdown, idKey, dataKey);
+                    infoElement.textContent = 'Please select an ID';
+                    infoElement.className = '';
+                } else {
+                    throw new Error('Failed to fetch data');
+                }
+            } catch (error) {
+                infoElement.textContent = 'Error fetching data';
+                infoElement.className = 'error';
+                console.error('Error:', error);
+            }
+        }
+
+        function populateDropdown(items, dropdown, idKey, dataKey) {
+            dropdown.innerHTML = `<option value="">Select an ID</option>`;
+            dropdown.disabled = false;
+
+            items.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item[idKey];
+                option.textContent = `${idKey} ${item[idKey]}`;
+                option.dataset[dataKey] = item[dataKey];
+                dropdown.appendChild(option);
+            });
+        }
+
+        buttonDropdown.addEventListener('change', (event) => {
+            const selectedOption = event.target.options[event.target.selectedIndex];
+            const clickedCount = selectedOption.dataset.clicked;
+
+            if (clickedCount) {
+                buttonClickedInfo.textContent = `Clicked count: ${clickedCount}`;
+                buttonClickedInfo.className = '';
+            } else {
+                buttonClickedInfo.textContent = 'Please select a valid Button ID';
+                buttonClickedInfo.className = '';
+            }
+        });
+
+        websiteDropdown.addEventListener('change', (event) => {
+            const selectedOption = event.target.options[event.target.selectedIndex];
+            const visitedCount = selectedOption.dataset.visited;
+
+            if (visitedCount) {
+                websiteVisitedInfo.textContent = `Visited count: ${visitedCount}`;
+                websiteVisitedInfo.className = '';
+            } else {
+                websiteVisitedInfo.textContent = 'Please select a valid Website ID';
+                websiteVisitedInfo.className = '';
+            }
+        });
+
+        fetchData(buttonApiUrl, buttonDropdown, buttonClickedInfo, 'buttonId', 'clicked');
+        fetchData(websiteApiUrl, websiteDropdown, websiteVisitedInfo, 'websiteId', 'visited');
+    </script>
+</body>
+</html>
