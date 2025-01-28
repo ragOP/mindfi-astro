@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5XFKNJ6G');</script>
+    <!-- End Google Tag Manager -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Lucid Dreaming</title>
+    <!-- Link to Google Fonts for Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", Sans-serif;
+            background-color: #FFFFFF;
+        }
+        /* Prevent input zoom on iOS devices */
+input, select, textarea {
+  font-size: 16px;
+}
+
+        header {
+            background-color: #000000;
+            color: #FFFFFF;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+        }
+        .highlight {
+           
+            color: #01B55E;
+        }
+        .bonus {
+            background-color: #000000;
+            color: #ffffff;
+            font-weight: 600;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 8px;
+        }
+        .bonus::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #000000;
+        }
+        .tabs-container {
+            background-color: #ffffff;
+            margin: 20px auto;
+            width: 90%;
+        }
+        .tabs-container-below {
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+      
+            /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333333;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 20px 25px;
+            font-size: 16px;
+            border: 1px solid #CCCCCC;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        input[type="text"]:focus, input[type="email"]:focus {
+            border-color: #01B55E;
+            box-shadow: 0 0 5px rgba(1, 181, 94, 0.5);
+        }
+        button {
+            padding: 12px 15px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #FFFFFF;
+            background-color: #000000;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #333333;
+        }
+        /* Accordion Styling */
+        .accordion {
+            background-color: #ffffff;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.3s ease;
+        }
+
+        .accordion.active, .accordion:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .accordion span {
+            font-size: 20px;
+        }
+
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: #fff;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: #fff;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* Money Back Guarantee Section */
+        .money-back {
+            background-color: #000000;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 20px;
+            font-weight: 600;
+            font-size: 18px;
+            margin-top: 40px;
+        }
+        .money-back img {
+            display: block;
+            margin: 20px auto;
+            width: 100px; /* Adjust width as per image size */
+            height: auto;
+        }
+
+        /* Legal Links Section */
+        .legal-links {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .legal-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+           
+        }
+        .legal-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .form-container {
+            width: 100%;
+            background: #EDEDED;
+            border: 1px solid rgb(65, 63, 63);
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-header {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab-header div {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .tab-header .active {
+            font-weight: bold;
+            opacity: 0.6;   
+            border-top: 3px solid rgb(0, 0, 0);
+            border-right: 3px solid rgb(0, 0, 0);
+            border-left: 3px solid rgb(0, 0, 0);
+            border-bottom: 3px solid rgb(0, 0, 0);
+            /* border-bottom: 1px solid rgb(0, 0, 0); */
+
+        }
+
+
+        .tab-content {
+            padding: 20px;
+        }
+
+        .tab-content.hidden {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            font-weight: 200;
+        }
+
+        .form-group input {
+            width: 90%;
+            padding: 15px 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #333;
+        }
+        .payment-summary {
+            padding: 5px;
+            margin-bottom: 15px;
+        }
+
+        .payment-summary h4 {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+
+        .payment-summary .product {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgb(183, 183, 183);
+            padding-bottom: 15px;
+        }
+
+        .upgrade-option {
+            border: 1px solid #707070;
+            padding: 25px 35px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .upgrade-option h5 {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+
+        .upgrade-option ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 10px;
+            text-align: left;
+        }
+
+        .upgrade-option ul li {
+            margin-bottom: 5px;
+        }
+
+        .payment-options{
+            width: 100%;
+            height: 170px;
+            margin: 0px auto;
+            display: block;
+            margin-bottom: -80px;
+        }
+        .payment-options img {
+            width: 100%;
+            margin: 10px auto;
+            display: block;
+        }
+
+        @keyframes glow {
+        0% {
+            box-shadow: 0 0 2.5px #37c800, 0 0 5px #37c800, 0 0 7.5px #37c800;
+        }
+        100% {
+            box-shadow: 0 0 5px #72ff00, 0 0 10px #72ff00, 0 0 15px #72ff00;
+        }
+           
+    }
+        .place-order {
+    width: 100%;
+    padding: 14px;
+    background-color: #37c800;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    border-radius: 100px 100px 100px 100px;
+    cursor: pointer;
+    animation: glow 1.5s infinite alternate;
+    /* margin-bottom: 100px; */
+    background-size: 200%;
+    /* animation: shimmer 5s ease infinite; */
+    }
+    
+   
+
+
+
+        .place-order:hover {
+            background-color: #333;
+        }
+        .warning-phone, .warning-email, .warning-fullname {
+            font-size: 10px;
+            font-weight: 100;
+            color: red;
+            display: none;
+        }
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+           
+            display: flex;
+            flex-direction: column-reverse; /* Ensures new toasts appear at the bottom */
+            gap: 10px;
+        }
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 15px; 
+            height: 25px;
+            
+            background-color: #ffffff;
+            color: #000000;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.5s ease-out, fadeOut 0.5s ease-in 4.5s;
+            opacity: 1;
+        }
+        .toast img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .toast p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+        }
+
+        /* Shimmer animation */
+@keyframes shimmer {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+
+    </style>
+ 
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XFKNJ6G"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <header>
+        Congrats! You’re One Step Away from Your 
+        <span class="highlight">MASTERING YOUR DREAMS!</span>
+    </header>
+    <div class="bonus">
+        Unlock the exclusive bonuses, Now!
+    </div>
+    <div class="tabs-container">
+        <div class="form-container">
+            <div class="tab-header">
+                <div class="tab-link active" data-tab="contact">1. Contact</div>
+                <div class="tab-link" data-tab="payment">2. Payment</div>
+            </div>
+            <div class="tab-content" id="contact">
+                <div class="form-group">
+                    <label for="full-name">Full Name *</label>
+                    <input type="text" id="full-name">
+                    <p class="warning-fullname">Full Name is required</p>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone *</label>
+                    <input type="text" id="phone">
+                    <p class="warning-phone">Phone number is required</p>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address *</label>
+                    <input type="email" id="email">
+                    <p class="warning-email">Email is required</p>
+                </div>
+                <button class="submit-button">
+                    <img width="20px" src="./arrow.png" alt="">
+                    NEXT STEP 
+                    <br> 
+                    <span style="font-size: 12px;">Yes! I want this offer!</span></button>
+            </div>
+            <div class="tab-content hidden" id="payment">
+                <div class="payment-summary">
+                    <h4>Product Summary :</h4>
+                    <div class="product">
+                        <span style="display: flex; width: 100%; align-items: center;">
+                            <img style="width: 60px; margin-right: 5px; border-radius: 8px;" src="./lucid1.png" alt="">
+                            <span style="font-weight: bold; font-size: 18px;">Lucid Mastery <br>Course</span>
+                        <div style="display: inline-block; text-align: center; margin-top: 0px;margin-left: 100px;">
+                            <span style="text-decoration: line-through;">₹4999.00</span>
+                            <br>
+                            <span style="text-decoration: none; font-weight: bold;">₹597.00</span>
+                          </div>
+                          
+                      
+
+                    </div>
+                    <div class="product">
+                        <strong style="margin-top: 27px;">Free Bonuses 🤩 </strong>
+                        <div style="display: inline-block; text-align: center; margin-top: 28px;">
+                            <span style="text-decoration: line-through;">₹12000.00</span>
+                            <br>
+                            <span style="text-decoration: none; font-weight: bold;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ₹0</span>
+                          </div>
+                          
+                    </div>
+                    <div class="product">
+                        <strong>Total</strong>
+                        <strong>₹597.00</strong>
+                    </div>
+                </div>
+        
+             
+        
+                <div class="payment-options">
+                    <img   style=" border-radius: 16px;"    src="./ph.png" alt="PhonePe Payment Options">
+                </div>
+                <!-- <p style="font-size: 10px; color: gray;">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="" style="color: red;" >privacy policy</a>.</p> -->
+        
+                <button class="place-order" id="payment-btn" >
+               
+                    <p style="margin: 0; font-size: 22px;">Complete Payment 	&rarr; </p>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accordion Section -->
+    <div class="tabs-container-below">
+        <button class="accordion">
+            If I don’t have PhonePe, how can I pay contact Details
+            <span class="toggle-icon">+</span>
+        </button>
+        <div class="panel">
+            <p>Don’t worry! You can use any UPI app like GPay, Paytm, or BHIM. Simply click on <em>Place Order</em> and select the UPI app of your choice to complete the payment.</p>
+        </div>
+
+        <button class="accordion">
+            How will I get the ebook and free bonuses?
+            <span class="toggle-icon">+</span>
+        </button>
+        <div class="panel">
+            <p>Once your payment is successful, you will receive an email with a download link for the ebook and all bonuses. Check your inbox or spam folder if you don’t see it.</p>
+        </div>
+    </div>
+  <!-- Money Back Guarantee Section -->
+  <div class="money-back">
+    <p>100% MONEY BACK GUARANTEE</p>
+    <img src="pic.wbep.webp" alt="Money Back Guarantee" />
+  
+  <h5>
+    "If this Lucid Dream plan doesn't exceed your expectations, I'll personally ensure you get 100% of your money back. No questions, no hassle. That's my commitment to you!"
+  </h5>
+    <div class="legal-links">
+        <a href="#"><h5>Privacy Policy</h5></a>
+
+     
+    </div>
+
+    <h6>2025- limited</h6>
+
+    <div class="toast-container" id="toast-container">
+        <!-- Toasts will appear here -->
+    </div>
+
+    <script>
+        const toastContainer = document.getElementById("toast-container");
+
+        // Toast messages array
+        const toastMessages = [
+            { name: "Aakash", city: "Chennai", product: "Lucid Mastery Course!", image: "./1.jpg" },
+            { name: "Priya", city: "Mumbai", product: "Lucid Mastery Course!", image: "./g1.jpg" },
+            { name: "Rahul", city: "Delhi", product: "Lucid Mastery Course!", image: "./2.jpg" },
+            { name: "Sneha", city: "Pune", product: "Lucid Mastery Course!", image: "./g2.jpg" },
+            { name: "Ravi", city: "Bangalore", product: "Lucid Mastery Course!", image: "./3.jpg"}
+        ];
+
+        let toastIndex = 0;
+
+        function showToast() {
+            // Remove the existing toast if present
+            const existingToast = document.querySelector(".toast");
+            if (existingToast) {
+                existingToast.remove();
+            }
+
+            // Get the current toast data
+            const toastData = toastMessages[toastIndex];
+
+            // Create a new toast
+            const toast = document.createElement("div");
+            toast.classList.add("toast");
+
+            toast.innerHTML = `
+                <img src="${toastData.image}" alt="User Image">
+                <p>${toastData.name} from ${toastData.city} has just purchased ${toastData.product}</p>
+            `;
+
+            // Append the toast to the container
+            toastContainer.appendChild(toast);
+
+            // Remove toast after 5 seconds
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+
+            // Increment the index to show the next toast, loop back to 0 if we reach the end
+            toastIndex = (toastIndex + 1) % toastMessages.length;
+        }
+
+        // Show a new toast every 3 seconds
+        setInterval(showToast, 6000);
+    </script>
+</div>
+
+<!-- Legal Links Section -->
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                var icon = this.querySelector(".toggle-icon");
+
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                    icon.textContent = "+";  // Change to plus when closed
+                } else {
+                    panel.style.display = "block";
+                    icon.textContent = "-";  // Change to minus when opened
+                }
+            });
+        }
+    </script>
+    <script>
+        const tabs = document.querySelectorAll('.tab-link');
+        const contents = document.querySelectorAll('.tab-content');
+        const fullName = document.getElementById('full-name');
+        const phone = document.getElementById('phone');
+        const email = document.getElementById('email');
+        const submitButton = document.querySelector('.submit-button');
+        const warningFullName = document.querySelector('.warning-fullname');
+        const warningPhone = document.querySelector('.warning-phone');
+        const warningEmail = document.querySelector('.warning-email');
+        const paymentBtn = document.getElementById('payment-btn');
+
+        
+    
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                let emailCheck = false;
+                let phoneCheck = false;
+                let fullNameCheck = false;
+                if(fullName.value == ""){
+                    warningFullName.style.display = 'block';
+                    fullName.style.border = '1px solid red';
+                    fullNameCheck = true;
+                }
+                if(email.value == ""){
+                    warningEmail.style.display = 'block';
+                    email.style.border = '1px solid red';
+                    emailCheck = true;
+                }
+                if(phone.value == ""){
+                    warningPhone.style.display = 'block';
+                    phone.style.border = '1px solid red';
+                    phoneCheck = true;
+                }
+                if(emailCheck || phoneCheck || fullNameCheck){
+                    return;
+                }
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.add('hidden'));
+                tab.classList.add('active');
+                const target = document.getElementById(tab.dataset.tab);
+                target.classList.remove('hidden');
+            });
+        });
+
+        tabs.forEach(tab => {
+            submitButton.addEventListener('click', () => {
+                let emailCheck = false;
+                let phoneCheck = false;
+                let fullNameCheck = false;
+                if(fullName.value == ""){
+                    warningFullName.style.display = 'block';
+                    fullName.style.border = '1px solid red';
+                    fullNameCheck = true;
+                }else{
+                    warningFullName.style.display = 'none';
+                    fullName.style.border = '';
+                    fullNameCheck = false;
+                }
+                if(email.value == ""){
+                    warningEmail.style.display = 'block';
+                    email.style.border = '1px solid red';
+                    emailCheck = true;
+                }else{
+                    warningEmail.style.display = 'none';
+                    email.style.border = '';
+                    emailCheck = false;
+                }
+                if(phone.value == ""){
+                    warningPhone.style.display = 'block';
+                    phone.style.border = '1px solid red';
+                    phoneCheck = true;
+                }else{
+                    warningPhone.style.display = 'none';
+                    phone.style.border = '';
+                    phoneCheck = false;
+                }
+                if(emailCheck || phoneCheck || fullNameCheck){
+                    return;
+                }
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.add('hidden'));
+                tab.classList.add('active');
+                const target = document.getElementById(tab.dataset.tab);
+                target.classList.remove('hidden');
+            });
+        });
+
+        paymentBtn.addEventListener('click', () => {
+            const queryParams = new URLSearchParams({
+			name: fullName.value,
+			email: email.value,
+			phone: phone.value,
+			amount: 1,
+		}).toString();
+		const redirectUrl = `https://phonepe-be.onrender.com/pay?${queryParams}`;
+		window.location.href = redirectUrl;
+        })
+    </script>
+</body>
+</html>
