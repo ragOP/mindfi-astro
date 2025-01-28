@@ -98,8 +98,8 @@
       const table = document.getElementById("paymentsTable");
       const tbody = table.querySelector("tbody");
       tbody.innerHTML = ""; // Clear existing rows
-
-      payments.forEach(payment => {
+  const reversedPayments = [...payments].reverse();
+      reversedPayments.forEach(payment => {
         const row = document.createElement("tr");
         row.innerHTML = `
           <td>${payment.transcationId}</td>
