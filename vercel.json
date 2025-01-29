@@ -1,7 +1,7 @@
 {
     "rewrites": [
       {
-        "source": "/engpp",
+        "source": "/engpp1",
         "destination": "/bundle.html"
     
       },
@@ -12,7 +12,7 @@
        
       },
       {
-        "source": "/test",
+        "source": "/test1",
         "destination": "/test.html"
        
       },
